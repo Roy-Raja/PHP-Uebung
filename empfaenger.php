@@ -1,27 +1,74 @@
 <?php
 
-    $name = $_POST['username'];
-    $pass = $_POST['blub'];
-    //echo($name.'-'.$pass);
-   // echo("<br/>");
-    //echo("SELECT * FROM test WHERE name =".$name." AND  password =".$pass);
-    
-    if(!empty($name) && !empty($pass))
-    {
 
-        if(strlen($name) >3 && strlen($pass) >3)
-        {
-            include("connect.php");
 
-            $theQuery ='SELECT * FROM user WHERE  name ="'.$name.'" AND  password ="'.$pass.'"';
-           // echo($theQuery);
-            //$theQuery = 'Select * from user where name="test" and password="test1"';
-            $resultUseres = mysqli_query($connection, $theQuery);
-            $menge = mysqli_num_rows($resultUseres);
-
-            echo($menge);
-        }
-        
+    $connection = mysqli_connect('localhost','root','','test' );
+    if(!$connection){
+        exit ("Fehler");
     }
-    
+
+$schmutz = "SELECT name FROM user";
+$dreck = mysqli_query($connection, $schmutz);
+
+
+if(mysqli_num_rows($dreck )>0){
+  while($reiher = mysqli_fetch_assoc($dreck)){
+    $a[] = $reiher["name"];
+  }
+}
+mysqli_close($connection);
+// Array with names
+$a[] = "Anna";
+$a[] = "Brittany";
+$a[] = "Cinderella";
+$a[] = "Diana";
+$a[] = "Eva";
+$a[] = "Fiona";
+$a[] = "Gunda";
+$a[] = "Hege";
+$a[] = "Inga";
+$a[] = "Johanna";
+$a[] = "Kitty";
+$a[] = "Linda";
+$a[] = "Nina";
+$a[] = "Ophelia";
+$a[] = "Petunia";
+$a[] = "Amanda";
+$a[] = "Raquel";
+$a[] = "Cindy";
+$a[] = "Doris";
+$a[] = "Eve";
+$a[] = "Evita";
+$a[] = "Sunniva";
+$a[] = "Tove";
+$a[] = "Unni";
+$a[] = "Violet";
+$a[] = "Liza";
+$a[] = "Elizabeth";
+$a[] = "Ellen";
+$a[] = "Wenche";
+$a[] = "Vicky";
+
+// get the q parameter from URL
+$q = $_REQUEST["q"];
+
+$hint = "";
+
+// lookup all hints from array if $q is different from ""
+if ($q !== "") {
+  $q = strtolower($q);
+  $len=strlen($q);
+  foreach($a as $name) {
+    if (stristr($q, substr($name, 0, $len))) {
+      if ($hint === "") {
+        $hint = $name;
+      } else {
+        $hint .= ", $name";
+      }
+    }
+  }
+}
+
+// Output "no suggestion" if no hint was found or output correct values
+echo $hint === "" ? "no suggestion" : $hint;
 ?>
