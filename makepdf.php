@@ -13,10 +13,9 @@ $mpdf = new \Mpdf\Mpdf();
 //Create PDF
 
 $data = '';
-
 $data .= '<h1>Name</h1>';
 
-//Add DAta
+//Add Data
 $data .= '<strong>First Name: </strong>' . $fname.'<br/>';
 $data .= '<strong>Last Name: </strong>' . $lname.'<br/>';
 
@@ -29,7 +28,7 @@ $data .= '<strong>Last Name: </strong>' . $lname.'<br/>';
  $mpdf->WriteHTML($data);
 
 //Output to Browser
-$mpdf->Output('myfile.pdf', 'D');
+$mpdf->Output('myfile.pdf', 'I');
 
 
 
